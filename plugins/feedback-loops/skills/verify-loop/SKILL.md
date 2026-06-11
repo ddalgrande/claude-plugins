@@ -31,7 +31,12 @@ Loop discipline:
 - **Don't move the goalposts.** Never weaken a check, skip a failing test, add `|| true`, or mark a box done to make the loop pass. A green loop you faked is worse than a red one you reported.
 
 ## 3. Layer 2 — end-to-end (feature changes)
-Unit tests passing ≠ the feature works. If the change is user-facing, run the recorded real-app leg: start the app, drive the changed path, and **observe actual behavior** (screenshot the UI / read the response body / check the console & network). Self-verification means seeing it work, not inferring it from tests. If this leg can't run in the current environment (no device, external dependency), say so explicitly and list what the user must verify manually — don't silently claim it works.
+Unit tests passing ≠ the feature works. If the change is user-facing, run the recorded real-app leg and **observe actual behavior** — seeing it work, not inferring it from tests. Follow the concrete recipes in `references/e2e-recipes.md` (relative to this skill):
+- **Backend** → boot the service, hit the changed endpoint (happy + error + auth paths), assert status/body, and grep the logs — a 200 with a stack trace is still a bug.
+- **Web UI** → start the dev server, drive the flow with Playwright (or chrome-devtools MCP), screenshot key states, and assert zero console errors / no failed network requests — not just that pixels look right.
+- **Video / glitch capture** → for animated or visually sensitive changes, record the flow (Playwright `recordVideo`, chrome-devtools performance trace, or mobile-mcp screen recording) and **review the recording** for jank, flicker, layout shift, and broken transitions that a static screenshot can't show. Never claim "no glitches" off a recording you didn't actually inspect.
+
+Use whichever MCP/tool the environment has (preference order in the recipes file); save artifacts to a temp dir, not the repo. If a leg can't run here (no device, external dependency), say so explicitly and list what the user must verify manually — don't silently claim it works.
 
 ## 4. Layer 3 — pre-merge review (before PR/merge)
 When the change is headed for a PR or merge, get a **second pair of eyes from a separate agent**: run `/code-review` (or `/review`). A fresh-context reviewer catches what the author-context agent rationalized past. Address findings, then re-run Layer 1.

@@ -36,11 +36,11 @@ Always read `package.json` `"scripts"` / `pyproject.toml` `[tool]` sections to u
 Don't trust the table — verify each candidate command resolves before recording it (e.g. the script exists in `package.json`, the tool is installed). Drop checks that aren't real. A loop full of failing-because-missing commands is worse than a short honest one.
 
 ### 3. Identify the real-app leg (highest-signal check)
-Unit tests alone don't prove a feature works. Record how to drive the **running** app for the kind of change this project ships:
-- **Web UI** → start dev server, then drive it (Playwright / chrome-devtools MCP, or the project's e2e command). Note the URL/port.
-- **Backend/service** → start command + a representative request (curl/httpie) or the integration-test command.
+Unit tests alone don't prove a feature works. Record how to drive the **running** app for the kind of change this project ships (the `verify-loop` skill's `references/e2e-recipes.md` has concrete, MCP-agnostic recipes for each):
+- **Web UI** → start dev server, then drive it (Playwright / chrome-devtools MCP, or the project's e2e command). Note the URL/port. For animated or visually sensitive UI, note that the flow should be **video-recorded** and reviewed for jank/flicker/layout-shift.
+- **Backend/service** → start command + a representative request (curl/httpie) on happy + error paths, or the integration-test command. Note where logs go (check them for stack traces).
 - **CLI** → the invocation that exercises the changed path.
-- **Mobile** → simulator boot + launch command.
+- **Mobile** → simulator boot + launch command (screen-record the flow for visual changes).
 
 ### 4. Confirm, then write the loop file
 Briefly show the user the detected checks and ask only if something is ambiguous (cheap confirmation beats a wrong loop). Then write `.claude/feedback-loop.md` using this template:
@@ -60,6 +60,8 @@ Run via the `verify-loop` skill. Keep in sync with CI.
 ## Layer 2 — end-to-end (feature changes)
 - start: `<command>`  (URL/port: <...>)
 - exercise: <how to drive the real app and what to observe>
+- logs: <where service logs go — check for stack traces>
+- record: <video/trace for visually sensitive UI — review for jank/flicker/layout-shift; omit if N/A>
 
 ## Layer 3 — pre-merge review (before PR/merge)
 - separate-agent review: `/code-review` (or `/review`)
