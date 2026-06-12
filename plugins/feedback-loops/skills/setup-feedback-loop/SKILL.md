@@ -71,8 +71,23 @@ Done = every Layer 1 check passes AND the Layer 2 leg shows the intended
 behavior in the real app. Never report done off Layer 1 alone.
 ```
 
-### 5. Hand off
-Tell the user it's recorded and that `verify-loop` will run it. Suggest committing `.claude/feedback-loop.md` so future sessions (and teammates) inherit the same contract.
+### 5. Make it always-on (CLAUDE.md pointer)
+A skill only fires when its description matches the moment; a CLAUDE.md line is read every turn. So the loop is more reliable as an always-on instruction than as something that depends on `verify-loop` triggering. Add a short pointer to the project's agent instructions file — `CLAUDE.md` (or `AGENTS.md` if that's what the repo uses), in the root or the relevant package:
+
+```markdown
+## Verification
+Before declaring any change done, run the feedback loop in
+`.claude/feedback-loop.md` — Layer 1 must pass; run the matching
+Layer 2 leg for feature changes. Don't report done off Layer 1 alone.
+```
+
+Rules:
+- **Don't duplicate.** If CLAUDE.md/AGENTS.md already has a verification section, add a one-line pointer to `.claude/feedback-loop.md` there instead of a second section — or skip it if the existing guidance already covers the loop.
+- **Respect repo git rules.** If the project forbids direct edits to its default branch (check CLAUDE.md), make this change on a branch + PR, not in place.
+- Keep the pointer to ~3 lines — the detail lives in `feedback-loop.md`, not CLAUDE.md.
+
+### 6. Hand off
+Tell the user it's recorded, the CLAUDE.md pointer is in place, and that `verify-loop` (or just the CLAUDE.md instruction) will run it. Suggest committing `.claude/feedback-loop.md` and the pointer so future sessions and teammates inherit the same contract.
 
 ## Principles
 - **Honest over complete** — only record checks that actually run.

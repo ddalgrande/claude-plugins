@@ -8,7 +8,7 @@ Based on Anthropic's [_Feedback loops: Help Claude Code complete ambitious tasks
 
 | Skill | Run | Does |
 |---|---|---|
-| `setup-feedback-loop` | once per project | Auto-detects the stack, finds the real verify commands (matching CI), and writes a reusable `.claude/feedback-loop.md`. |
+| `setup-feedback-loop` | once per project | Auto-detects the stack, finds the real verify commands (matching CI), writes a reusable `.claude/feedback-loop.md`, and adds an always-on pointer to it in `CLAUDE.md`/`AGENTS.md`. |
 | `verify-loop` | every change, before "done" | Runs the recorded checks, fixes failures, re-runs until green, then reports honestly. |
 
 Both trigger automatically from context, or invoke by name.
