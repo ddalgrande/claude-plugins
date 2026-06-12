@@ -1,6 +1,6 @@
 ---
 name: setup-feedback-loop
-description: Use when a project has no documented self-verification process, or the user asks to "set up a feedback loop", "make Claude self-verify", "what checks should I run here", "encode verification as a skill", or before starting ambitious multi-step work in an unfamiliar repo. Auto-detects the stack and writes a reusable .claude/feedback-loop.md that the verify-loop skill runs after every change.
+description: Use when a project has no documented self-verification process, or the user asks to "set up a feedback loop", "make Claude self-verify", "what checks should I run here", "encode verification as a skill", or before starting ambitious multi-step work in an unfamiliar repo. Auto-detects the stack and writes a reusable docs/verification.md (referenced from CLAUDE.md) that the verify-loop skill runs after every change.
 ---
 
 # Setup Feedback Loop
@@ -10,8 +10,11 @@ Run **once per project**. Goal: discover the checks that prove a change is corre
 > The more Claude can self-verify, the more independently it works on long-running tasks, the higher the final quality, and the fewer back-and-forths it takes. This skill writes down the verification process; `verify-loop` executes it.
 
 ## When NOT to use
-- `.claude/feedback-loop.md` already exists and is accurate → skip straight to `verify-loop`.
+- `docs/verification.md` already exists and is accurate → skip straight to `verify-loop`.
 - The user only wants a one-off check right now → use `verify-loop` directly.
+
+## Where this lives (and why)
+The verification checklist is a **human-readable doc at `docs/verification.md`**, referenced from `CLAUDE.md` by a short prose pointer — not a bespoke `.claude/` file (Claude Code doesn't auto-load arbitrary `.claude/*.md`) and not a `@import` (imports load into context every session; a verification checklist only needs to load when a change is being verified). This matches the standard "lean CLAUDE.md → `docs/` for detail" pattern. If the repo keeps agent docs elsewhere (e.g. `agent_docs/`, or a path-scoped `.claude/rules/testing.md`), follow that convention instead.
 
 ## Procedure
 
@@ -42,13 +45,13 @@ Unit tests alone don't prove a feature works. Record how to drive the **running*
 - **CLI** → the invocation that exercises the changed path.
 - **Mobile** → simulator boot + launch command (screen-record the flow for visual changes).
 
-### 4. Confirm, then write the loop file
-Briefly show the user the detected checks and ask only if something is ambiguous (cheap confirmation beats a wrong loop). Then write `.claude/feedback-loop.md` using this template:
+### 4. Confirm, then write the doc
+Briefly show the user the detected checks and ask only if something is ambiguous (cheap confirmation beats a wrong loop). Create `docs/` if it doesn't exist, then write `docs/verification.md` using this template:
 
 ```markdown
-# Feedback loop
+# Verification
 
-Checks the agent runs to self-verify a change. Ordered fast → slow.
+Checks to self-verify a change before declaring it done. Ordered fast → slow.
 Run via the `verify-loop` skill. Keep in sync with CI.
 
 ## Layer 1 — internal checks (every change)
@@ -71,25 +74,25 @@ Done = every Layer 1 check passes AND the Layer 2 leg shows the intended
 behavior in the real app. Never report done off Layer 1 alone.
 ```
 
-### 5. Make it always-on (CLAUDE.md pointer)
-A skill only fires when its description matches the moment; a CLAUDE.md line is read every turn. So the loop is more reliable as an always-on instruction than as something that depends on `verify-loop` triggering. Add a short pointer to the project's agent instructions file — `CLAUDE.md` (or `AGENTS.md` if that's what the repo uses), in the root or the relevant package:
+### 5. Reference it from CLAUDE.md (prose pointer)
+So Claude finds the doc, add a short **prose pointer** to the project's agent instructions file — `CLAUDE.md` (or `AGENTS.md` if that's what the repo uses). Use a prose pointer, not `@docs/verification.md` — an `@import` would load the whole checklist into context every session, whereas a pointer lets Claude read the doc on demand when verifying:
 
 ```markdown
 ## Verification
-Before declaring any change done, run the feedback loop in
-`.claude/feedback-loop.md` — Layer 1 must pass; run the matching
-Layer 2 leg for feature changes. Don't report done off Layer 1 alone.
+Before declaring any change done, verify against `docs/verification.md`
+— Layer 1 checks must pass; run the matching Layer 2 leg for feature
+changes. Never silently ship "I think this works".
 ```
 
 Rules:
-- **Don't duplicate.** If CLAUDE.md/AGENTS.md already has a verification section, add a one-line pointer to `.claude/feedback-loop.md` there instead of a second section — or skip it if the existing guidance already covers the loop.
-- **Respect repo git rules.** If the project forbids direct edits to its default branch (check CLAUDE.md), make this change on a branch + PR, not in place.
-- Keep the pointer to ~3 lines — the detail lives in `feedback-loop.md`, not CLAUDE.md.
+- **Don't duplicate.** If CLAUDE.md/AGENTS.md already has a verification section, fold its content into `docs/verification.md` and replace the section with the pointer — don't leave two copies. This also trims CLAUDE.md (target < 200 lines).
+- **Respect repo git rules.** If the project forbids direct edits to its default branch (check CLAUDE.md), make these changes on a branch + PR, not in place.
+- Keep the pointer to ~3 lines — the detail lives in `docs/verification.md`, not CLAUDE.md.
 
 ### 6. Hand off
-Tell the user it's recorded, the CLAUDE.md pointer is in place, and that `verify-loop` (or just the CLAUDE.md instruction) will run it. Suggest committing `.claude/feedback-loop.md` and the pointer so future sessions and teammates inherit the same contract.
+Tell the user it's recorded, the CLAUDE.md pointer is in place, and that `verify-loop` (or just the CLAUDE.md instruction) will run it. Suggest committing `docs/verification.md` and the pointer so future sessions and teammates inherit the same contract.
 
 ## Principles
 - **Honest over complete** — only record checks that actually run.
 - **Match CI** — the loop should mirror what merge gates on.
-- **Surgical** — write the one file; don't reconfigure the project.
+- **Surgical** — write `docs/verification.md` + the pointer; don't reconfigure the project.

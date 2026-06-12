@@ -1,6 +1,6 @@
 {
   "name": "feedback-loops",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Self-verification feedback loops for Claude Code. Detect a project's verification checks once, then loop run→observe→fix until everything is green before declaring a task done — including backend endpoint checks and Playwright UI runs with video/glitch review — so Claude works on ambitious tasks with less babysitting.",
   "author": {
     "name": "Daniele Dal Grande"

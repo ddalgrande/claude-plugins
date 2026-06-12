@@ -8,7 +8,7 @@ Based on Anthropic's [_Feedback loops: Help Claude Code complete ambitious tasks
 
 | Skill | Run | Does |
 |---|---|---|
-| `setup-feedback-loop` | once per project | Auto-detects the stack, finds the real verify commands (matching CI), writes a reusable `.claude/feedback-loop.md`, and adds an always-on pointer to it in `CLAUDE.md`/`AGENTS.md`. |
+| `setup-feedback-loop` | once per project | Auto-detects the stack, finds the real verify commands (matching CI), writes a reusable `docs/verification.md`, and adds a prose pointer to it in `CLAUDE.md`/`AGENTS.md`. |
 | `verify-loop` | every change, before "done" | Runs the recorded checks, fixes failures, re-runs until green, then reports honestly. |
 
 Both trigger automatically from context, or invoke by name.
@@ -16,7 +16,7 @@ Both trigger automatically from context, or invoke by name.
 ## The loop
 
 ```
-setup-feedback-loop  →  .claude/feedback-loop.md  →  verify-loop (run→observe→fix→repeat until green)
+setup-feedback-loop  →  docs/verification.md  →  verify-loop (run→observe→fix→repeat until green)
 ```
 
 Three layers of verification:
@@ -24,7 +24,7 @@ Three layers of verification:
 2. **End-to-end** — drive the running app and observe real behavior (feature changes).
 3. **Pre-merge review** — a separate agent (`/code-review`) before PR/merge.
 
-`.claude/feedback-loop.md` is committable, so every future session and teammate inherits the same verification contract.
+`docs/verification.md` is a human-readable, committable doc (referenced from `CLAUDE.md` by a prose pointer, not a context-heavy `@import`), so every future session and teammate inherits the same verification contract — and it renders on GitHub.
 
 ## Install
 

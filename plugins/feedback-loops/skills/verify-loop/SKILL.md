@@ -1,6 +1,6 @@
 ---
 name: verify-loop
-description: Use after editing code and before declaring a task done, or when the user asks to "verify", "run the feedback loop", "is it green", "self-verify", or "make sure it actually works". Runs the project's recorded checks, fixes failures, and re-runs until everything is green — then reports honestly. Reads .claude/feedback-loop.md (runs setup-feedback-loop first if it is missing).
+description: Use after editing code and before declaring a task done, or when the user asks to "verify", "run the feedback loop", "is it green", "self-verify", or "make sure it actually works". Runs the project's recorded checks, fixes failures, and re-runs until everything is green — then reports honestly. Reads docs/verification.md (runs setup-feedback-loop first if it is missing).
 ---
 
 # Verify Loop
@@ -8,7 +8,7 @@ description: Use after editing code and before declaring a task done, or when th
 Execute the project's feedback loop: run each check, observe, fix failures, re-run until green. This is the loop that lets you finish ambitious work without the user babysitting every step.
 
 ## 0. Load the loop definition
-- Read `.claude/feedback-loop.md`.
+- Read `docs/verification.md` (the project's checklist; CLAUDE.md's verification pointer names it if it lives elsewhere, e.g. `.claude/rules/testing.md`).
 - **Missing?** Invoke the `setup-feedback-loop` skill once to create it, then continue. (If the user wants a quick one-off and won't persist anything, detect the obvious checks ad hoc — typecheck, lint, test — and run those instead.)
 
 ## 1. Define success criteria first
