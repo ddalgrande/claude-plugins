@@ -9,14 +9,14 @@ Based on Anthropic's [_Feedback loops: Help Claude Code complete ambitious tasks
 | Skill | Run | Does |
 |---|---|---|
 | `setup-feedback-loop` | once per project | Auto-detects the stack, finds the real verify commands (matching CI), writes a reusable `docs/verification.md`, and adds a prose pointer to it in `CLAUDE.md`/`AGENTS.md`. |
-| `verify-loop` | every change, before "done" | Runs the recorded checks, fixes failures, re-runs until green, then reports honestly. |
+| `green-loop` | every change, before "done" | Runs the recorded checks, fixes failures, re-runs until green, then reports honestly. |
 
 Both trigger automatically from context, or invoke by name.
 
 ## The loop
 
 ```
-setup-feedback-loop  →  docs/verification.md  →  verify-loop (run→observe→fix→repeat until green)
+setup-feedback-loop  →  docs/verification.md  →  green-loop (run→observe→fix→repeat until green)
 ```
 
 Three layers of verification:
