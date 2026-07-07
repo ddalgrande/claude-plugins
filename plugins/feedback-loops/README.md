@@ -29,7 +29,7 @@ Three layers of verification:
 ## Install
 
 ```bash
-claude plugin marketplace add ~/.claude/feedback-loops-plugin
+claude plugin marketplace add ddalgrande/feedback-loops-plugin
 claude plugin install feedback-loops@feedback-loops
 ```
 

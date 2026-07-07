@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Encode your verification processes as skills so Claude Code self-verifies and completes ambitious tasks with less babysitting.",
-    "version": "1.3.0"
+    "version": "1.4.0"
   },
   "plugins": [
     {
       "name": "feedback-loops",
       "source": "./plugins/feedback-loops",
-      "description": "Self-verification feedback loops: detect a project's checks once, then run run→observe→fix until green before declaring done.",
-      "version": "1.0.0",
+      "description": "Self-verification feedback loops: detect a project's checks once, then run run\u2192observe\u2192fix until green before declaring done.",
+      "version": "1.4.0",
       "author": {
         "name": "Daniele Dal Grande"
       },
@@ -25,7 +25,8 @@
         "autonomy",
         "workflow"
       ],
-      "category": "workflow"
+      "category": "workflow",
+      "repository": "https://github.com/ddalgrande/feedback-loops-plugin"
     }
   ]
 }
