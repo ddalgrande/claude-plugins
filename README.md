@@ -12,14 +12,14 @@ Daniele Dal Grande's Claude Code plugin marketplace.
 
 ```bash
 claude plugin marketplace add ddalgrande/claude-plugins
-claude plugin install feedback-loops@claude-plugins
+claude plugin install feedback-loops@ddalgrande-plugins
 ```
 
 Or from a local clone:
 
 ```bash
 claude plugin marketplace add /path/to/claude-plugins
-claude plugin install feedback-loops@claude-plugins
+claude plugin install feedback-loops@ddalgrande-plugins
 ```
 
 See [plugins/feedback-loops/README.md](plugins/feedback-loops/README.md) for full plugin docs.

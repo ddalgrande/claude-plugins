@@ -30,7 +30,7 @@ Three layers of verification:
 
 ```bash
 claude plugin marketplace add ddalgrande/claude-plugins
-claude plugin install feedback-loops@claude-plugins
+claude plugin install feedback-loops@ddalgrande-plugins
 ```
 
 ## Principles
