@@ -1,11 +1,11 @@
 {
-  "name": "feedback-loops",
-  "id": "feedback-loops",
+  "name": "claude-plugins",
+  "id": "claude-plugins",
   "owner": {
     "name": "Daniele Dal Grande"
   },
   "metadata": {
-    "description": "Encode your verification processes as skills so Claude Code self-verifies and completes ambitious tasks with less babysitting.",
+    "description": "Daniele Dal Grande's Claude Code plugins.",
     "version": "1.4.0"
   },
   "plugins": [
@@ -26,7 +26,7 @@
         "workflow"
       ],
       "category": "workflow",
-      "repository": "https://github.com/ddalgrande/feedback-loops-plugin"
+      "repository": "https://github.com/ddalgrande/claude-plugins"
     }
   ]
 }

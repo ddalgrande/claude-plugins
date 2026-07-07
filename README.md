@@ -1,28 +1,25 @@
-# feedback-loops-plugin
+# claude-plugins
 
-Claude Code plugin marketplace with a single plugin: **feedback-loops** — encode your verification processes as skills so Claude Code self-verifies and finishes ambitious tasks with less babysitting.
+Daniele Dal Grande's Claude Code plugin marketplace.
 
-Based on Anthropic's [_Feedback loops: Help Claude Code complete ambitious tasks with less babysitting_](https://www.anthropic.com/engineering).
+## Plugins
 
-## Skills
-
-| Skill | Run | Does |
-|---|---|---|
-| `setup-feedback-loop` | once per project | Auto-detects the stack, finds the real verify commands (matching CI), writes a reusable `docs/verification.md`, and adds a prose pointer to it in `CLAUDE.md`/`AGENTS.md`. |
-| `green-loop` | every change, before "done" | Runs the recorded checks, fixes failures, re-runs until green, then reports honestly. |
+| Plugin | Does |
+|---|---|
+| [feedback-loops](plugins/feedback-loops/) | Encode your verification processes as skills so Claude Code self-verifies and finishes ambitious tasks with less babysitting. Skills: `setup-feedback-loop` (once per project — detects the stack, writes `docs/verification.md`), `green-loop` (every change — runs the recorded checks until green). Based on Anthropic's [_Feedback loops_](https://www.anthropic.com/engineering) post. |
 
 ## Install
 
 ```bash
-claude plugin marketplace add ddalgrande/feedback-loops-plugin
-claude plugin install feedback-loops@feedback-loops
+claude plugin marketplace add ddalgrande/claude-plugins
+claude plugin install feedback-loops@claude-plugins
 ```
 
 Or from a local clone:
 
 ```bash
-claude plugin marketplace add /path/to/feedback-loops-plugin
-claude plugin install feedback-loops@feedback-loops
+claude plugin marketplace add /path/to/claude-plugins
+claude plugin install feedback-loops@claude-plugins
 ```
 
 See [plugins/feedback-loops/README.md](plugins/feedback-loops/README.md) for full plugin docs.

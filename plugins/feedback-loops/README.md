@@ -29,8 +29,8 @@ Three layers of verification:
 ## Install
 
 ```bash
-claude plugin marketplace add ddalgrande/feedback-loops-plugin
-claude plugin install feedback-loops@feedback-loops
+claude plugin marketplace add ddalgrande/claude-plugins
+claude plugin install feedback-loops@claude-plugins
 ```
 
 ## Principles
