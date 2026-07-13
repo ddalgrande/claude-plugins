@@ -41,6 +41,8 @@ Use whichever MCP/tool the environment has (preference order in the recipes file
 ## 4. Layer 3 — pre-merge review (before PR/merge)
 When the change is headed for a PR or merge, get a **second pair of eyes from a separate agent**: run `/code-review` (or `/review`). A fresh-context reviewer catches what the author-context agent rationalized past. Address findings, then re-run Layer 1.
 
+> Layer 3 review is part of *delivery*. If the `ship` plugin is installed, this step is folded into `/ship` (see step 6) — don't run it twice.
+
 ## 5. Report
 End with a tight status the user can trust:
 - ✅ each check that passed (with the command), so it's auditable.
@@ -49,6 +51,10 @@ End with a tight status the user can trust:
 
 State results plainly. If something failed, say so with the output. Only write a completion headline once the loop is actually green against the criteria you set.
 
+## 6. Hand off to delivery
+Green proves the change is **correct** — it does not deliver it. When the change is meant to go out (the user asked to ship / open a PR / merge), hand off to the `ship` skill (`/ship`, from `ship@ddalgrande-plugins`): it takes the green change onto a feature branch, rebases onto the latest base (re-running this loop's Layer 1 if the base moved), runs Layer 3 review, pushes, opens the PR, and watches it to green. Keep the split clean — this loop owns *correctness*, `ship` owns *delivery*; don't reimplement branch/push/PR steps here.
+
 ## Composition
 - Pair with `setup-feedback-loop` (defines the loop) — this skill (runs it).
+- Hand off to `ship` (`/ship`) once green when the change is headed out the door — correctness here, delivery there.
 - For unattended/background runs, this loop is the safety rail: it keeps working until green or until it hits a real blocker worth surfacing.
