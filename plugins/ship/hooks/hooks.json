@@ -1,7 +1,9 @@
 {
+  "description": "ship-gate: fail-open, opt-in Stop hook that blocks 'done' while delivery is incomplete (delivery state only — never runs lint/tests).",
   "hooks": {
     "Stop": [
       {
+        "matcher": "*",
         "hooks": [
           {
             "type": "command",
