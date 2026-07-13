@@ -24,6 +24,11 @@ Three layers of verification:
 2. **End-to-end** — drive the running app and observe real behavior (feature changes).
 3. **Pre-merge review** — a separate agent (`/code-review`) before PR/merge.
 
+Once green, hand off to the companion [`ship`](../ship/) plugin (`/ship`) to
+deliver the change (feature branch → rebase → review → push → PR → watch).
+feedback-loops owns **correctness**; ship owns **delivery** — the check commands
+live once here (in `docs/verification.md`) and are never duplicated in ship.
+
 `docs/verification.md` is a human-readable, committable doc (referenced from `CLAUDE.md` by a prose pointer, not a context-heavy `@import`), so every future session and teammate inherits the same verification contract — and it renders on GitHub.
 
 ## Install

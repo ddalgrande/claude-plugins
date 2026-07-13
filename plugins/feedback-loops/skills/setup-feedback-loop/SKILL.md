@@ -31,11 +31,13 @@ its own clearly-flagged step — never bundle it into setup. The default setup i
 **skill + `docs/verification.md`, no hook.**
 
 If the user does want enforcement, **prefer a maintained gate plugin over a
-hand-rolled hook.** A tested, config-driven Stop-hook (e.g. `ship@ship-tools`'s
-`ship-gate` — fails open, reads per-repo config, no hardcoded paths) beats a
-bespoke script every time: point its quality/test gate commands at this repo's
-`docs/verification.md` Layer 1, and let its web/e2e verifier cover Layer 2.
-Authoring the contract (this skill) and enforcing it (the plugin) stay separate
+hand-rolled hook.** The companion `ship@ddalgrande-plugins` plugin ships a
+tested, config-driven `ship-gate` Stop-hook (fails open, opt-in via
+`.claude/ship.config.json`, no hardcoded paths). Note the split: `ship-gate`
+enforces **delivery** state only (tree clean, pushed, PR green) and deliberately
+runs **no** lint/tests — the code-quality checks stay defined once in this
+repo's `docs/verification.md` and are run by `green-loop`. Authoring the
+contract (this skill) and enforcing delivery (the `ship` plugin) stay separate
 layers — don't hand-roll a Stop hook when a tested one already exists.
 
 ## Where this lives (and why)
