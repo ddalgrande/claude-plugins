@@ -1,0 +1,21 @@
+{
+  "name": "ship",
+  "version": "1.5.0",
+  "description": "Delivery loop for Claude Code. The /ship skill takes a green change out the door — verify → feature branch → rebase (re-running Layer 1 when the base moved) → /code-review → push → PR → watch — and an opt-in Stop-hook gate refuses to call a task done while delivery is incomplete (dirty tree, stranded on a protected branch, unpushed, PR red/conflicted, or unreviewed). Delivery only; never runs your lint/tests — that is feedback-loops' job.",
+  "author": {
+    "name": "Daniele Dal Grande"
+  },
+  "keywords": [
+    "ship",
+    "delivery",
+    "pull-request",
+    "git",
+    "rebase",
+    "code-review",
+    "stop-hook",
+    "workflow"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/ddalgrande/claude-plugins",
+  "homepage": "https://github.com/ddalgrande/claude-plugins"
+}

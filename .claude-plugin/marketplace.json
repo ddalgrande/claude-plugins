@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Daniele Dal Grande's Claude Code plugins.",
-    "version": "1.4.0"
+    "version": "1.5.0"
   },
   "plugins": [
     {
       "name": "feedback-loops",
       "source": "./plugins/feedback-loops",
-      "description": "Self-verification feedback loops: detect a project's checks once, then run run\u2192observe\u2192fix until green before declaring done.",
-      "version": "1.4.0",
+      "description": "Self-verification feedback loops: detect a project's checks once, then run run→observe→fix until green before declaring done.",
+      "version": "1.5.0",
       "author": {
         "name": "Daniele Dal Grande"
       },
@@ -23,6 +23,27 @@
         "testing",
         "ci",
         "autonomy",
+        "workflow"
+      ],
+      "category": "workflow",
+      "repository": "https://github.com/ddalgrande/claude-plugins"
+    },
+    {
+      "name": "ship",
+      "source": "./plugins/ship",
+      "description": "Delivery loop: take a green change out the door — feature branch → rebase (re-verify when the base moved) → /code-review → push → PR → watch — with an opt-in, fail-open Stop-hook gate that enforces delivery state only (never runs your lint/tests).",
+      "version": "1.5.0",
+      "author": {
+        "name": "Daniele Dal Grande"
+      },
+      "keywords": [
+        "ship",
+        "delivery",
+        "pull-request",
+        "git",
+        "rebase",
+        "code-review",
+        "stop-hook",
         "workflow"
       ],
       "category": "workflow",
