@@ -25,6 +25,14 @@ conflict), the earlier green is stale — `ship` re-runs Layer 1 via `green-loop
 before continuing. Code proven green against the old base is not proven green
 against the new one.
 
+## Closing review threads
+
+Pushing the fix isn't enough. For each review comment `ship` addresses, it
+*replies on the thread* with what changed and **marks the thread resolved**, so
+the review loop is visibly closed — the commit closes the code, the reply +
+resolved thread closes the conversation. Delivery isn't done while a thread is
+left silently open.
+
 ## The gate
 
 The `Stop` hook (`hooks/ship-gate.sh`) enforces the delivery half

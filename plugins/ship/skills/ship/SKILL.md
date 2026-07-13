@@ -71,6 +71,15 @@ PR is not delivered. On CI failure: re-diagnose, fix (via `green-loop`), push,
 let CI re-run. On merge conflict: rebase (step 3, which re-triggers re-verify),
 push.
 
+**Close review threads visibly — pushing the fix isn't enough.** For each
+review comment you address, *reply on that thread* saying what you changed (and
+why, if you pushed back), then **mark the thread resolved**. A silent push
+leaves the reviewer guessing whether you saw the comment; the commit closes the
+code, but the reply + resolved thread is what closes the *conversation*. Don't
+resolve a thread you only partially addressed, and don't resolve someone else's
+thread without a reply. Delivery isn't done until every thread is either
+resolved or has an explicit, unresolved reason it can't be.
+
 ## The Stop-hook gate (optional, opt-in)
 This plugin also ships a `Stop` hook (`hooks/ship-gate.sh`) that enforces the
 *delivery* half deterministically: it refuses to let the session declare done
