@@ -96,9 +96,13 @@ Run via the `green-loop` skill. Keep in sync with CI.
 ## Layer 3 — pre-merge review (before PR/merge)
 - separate-agent review: `/code-review` (or `/review`)
 
-## Success criteria
-Done = every Layer 1 check passes AND the Layer 2 leg shows the intended
-behavior in the real app. Never report done off Layer 1 alone.
+## Definition of Done
+A change is **done** only when all of these hold — never off Layer 1 alone:
+- **Layer 1 green** — typecheck, lint, test, build all pass
+- **Layer 2 verified** — behavior shown in the running app (feature changes), not inferred from tests
+- **No regressions** — existing tests still pass; nothing adjacent broke
+- **Docs updated** — behavior/API/flag/setup changes reflected in README/docs (skip only if nothing user-facing changed)
+- **Layer 3 clean** — separate-agent review passed before PR/merge
 ```
 
 ### 5. Reference it from CLAUDE.md (prose pointer)
