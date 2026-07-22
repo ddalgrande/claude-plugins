@@ -12,7 +12,7 @@ Execute the project's feedback loop: run each check, observe, fix failures, re-r
 - **Missing?** Invoke the `setup-feedback-loop` skill once to create it, then continue. (If the user wants a quick one-off and won't persist anything, detect the obvious checks ad hoc — typecheck, lint, test — and run those instead.)
 
 ## 1. Define success criteria first
-State, in one line, what "done" means for *this* change before running anything — e.g. "all Layer 1 checks pass and the new endpoint returns 200 with the expected body." Weak criteria ("make it work") make the loop unverifiable; concrete criteria let it run independently.
+State, in one line, what "done" means for *this* change before running anything — e.g. "all Layer 1 checks pass and the new endpoint returns 200 with the expected body." Weak criteria ("make it work") make the loop unverifiable; concrete criteria let it run independently. The standing bar is the **Definition of Done** in `docs/verification.md` (Layer 1 green, Layer 2 verified, no regressions, docs updated, Layer 3 clean); this step restates it concretely for the change at hand.
 
 ## 2. The loop — Layer 1 (internal checks)
 Run checks in the recorded order (fast → slow: typecheck → lint → test → build). For each:
@@ -47,6 +47,7 @@ When the change is headed for a PR or merge, get a **second pair of eyes from a 
 End with a tight status the user can trust:
 - ✅ each check that passed (with the command), so it's auditable.
 - ⚠️ anything skipped and why (e.g. "e2e: no simulator in this env — verify manually").
+- 📝 docs updated for any behavior/API/flag/setup change (or state "no docs impact").
 - The success criteria from step 1, marked met / not met.
 
 State results plainly. If something failed, say so with the output. Only write a completion headline once the loop is actually green against the criteria you set.

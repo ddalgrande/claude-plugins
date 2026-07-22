@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Daniele Dal Grande's Claude Code plugins.",
-    "version": "1.5.0"
+    "version": "1.6.0"
   },
   "plugins": [
     {
       "name": "feedback-loops",
       "source": "./plugins/feedback-loops",
       "description": "Self-verification feedback loops: detect a project's checks once, then run run→observe→fix until green before declaring done.",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": {
         "name": "Daniele Dal Grande"
       },
